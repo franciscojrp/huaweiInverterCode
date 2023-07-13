@@ -1,0 +1,391 @@
+[
+    {
+        "id": "fa665b88aa84652e",
+        "type": "tab",
+        "label": "InversorHuawei",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "63ce5070425a3068",
+        "type": "modbus-read",
+        "z": "fa665b88aa84652e",
+        "name": "Huawei",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "0",
+        "dataType": "HoldingRegister",
+        "adr": "32000",
+        "quantity": "90",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "97dae5c9bd33f9c4",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "2e6a2d773d9bbeba"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2e6a2d773d9bbeba",
+        "type": "buffer-parser",
+        "z": "fa665b88aa84652e",
+        "name": "Parser Inverter Modbus TCP",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "string1_V",
+                "offset": 32,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "string1_A",
+                "offset": 34,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "string2_V",
+                "offset": 36,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "string2_A",
+                "offset": 38,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            },
+            {
+                "type": "int32be",
+                "name": "panels_power_kW",
+                "offset": 128,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/1000",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "grid_power_V",
+                "offset": 132,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "int32be",
+                "name": "grid_power_A",
+                "offset": 144,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/1000",
+                "mask": ""
+            },
+            {
+                "type": "int32be",
+                "name": "day_active_power_peak_kW",
+                "offset": 156,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/1000",
+                "mask": ""
+            },
+            {
+                "type": "int32be",
+                "name": "active_power_kW",
+                "offset": 160,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/1000",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "grid_frequency_Hz",
+                "offset": 170,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "inverter_efficiency",
+                "offset": 172,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "inverter_temp",
+                "offset": 174,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "inverter_status",
+                "offset": 178,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "ed1d568a8e12c726"
+            ]
+        ]
+    },
+    {
+        "id": "9c2a6f967f8e6305",
+        "type": "buffer-parser",
+        "z": "fa665b88aa84652e",
+        "name": "Parser Powermeter Modbus TCP",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int32be",
+                "name": "powermeter_kW",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/1000",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 420,
+        "y": 260,
+        "wires": [
+            [
+                "79defa49cf24c12b"
+            ]
+        ]
+    },
+    {
+        "id": "2d3914b98df5d06d",
+        "type": "debug",
+        "z": "fa665b88aa84652e",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c10f40db18841363",
+        "type": "influxdb out",
+        "z": "fa665b88aa84652e",
+        "influxdb": "f769ef35385ef6c2",
+        "name": "InfluxDB",
+        "measurement": "Huawei",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "casaCaste",
+        "bucket": "Inversor",
+        "x": 900,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "85bb14e6a70d08e3",
+        "type": "modbus-read",
+        "z": "fa665b88aa84652e",
+        "name": "Huawei",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "0",
+        "dataType": "HoldingRegister",
+        "adr": "37113",
+        "quantity": "2",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "97dae5c9bd33f9c4",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "9c2a6f967f8e6305"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ed1d568a8e12c726",
+        "type": "join",
+        "z": "fa665b88aa84652e",
+        "name": "Union",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "c10f40db18841363"
+            ]
+        ]
+    },
+    {
+        "id": "79defa49cf24c12b",
+        "type": "function",
+        "z": "fa665b88aa84652e",
+        "name": "Split value",
+        "func": "var value = msg.payload[\"powermeter_kW\"]\nif (value >= 0) {\n    // > 0: feeding power to the grid\n    msg.payload[\"exported_kW\"] = value;\n    msg.payload[\"imported_kW\"] = 0;\n} else {\n    // < 0: obtaining power from the grid\n    msg.payload[\"exported_kW\"] = 0;\n    msg.payload[\"imported_kW\"] = value * -1;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "ed1d568a8e12c726"
+            ]
+        ]
+    },
+    {
+        "id": "97dae5c9bd33f9c4",
+        "type": "modbus-client",
+        "name": "Huawei SUN-2000",
+        "clienttype": "tcp",
+        "bufferCommands": false,
+        "stateLogEnabled": false,
+        "queueLogEnabled": true,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.200.1",
+        "tcpPort": "6607",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "0",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "f769ef35385ef6c2",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.50.213:8086",
+        "rejectUnauthorized": false
+    }
+]
