@@ -1,0 +1,66 @@
+version: '3'
+services:
+  homebridge:
+    image: oznu/homebridge:latest
+    container_name: homebridge
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /home/fran/domotica/homebridge:/homebridge
+    logging:
+      driver: json-file
+      options:
+        max-size: "10mb"
+        max-file: "1"
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /home/fran/domotica/mosquitto/data:/mosquitto/data
+      - /home/fran/domotica/mosquitto/log:/mosquitto/log
+      - /home/fran/domotica/mosquitto/config:/mosquitto/config
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /home/fran/domotica/hass:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest
+    restart: unless-stopped
+    volumes:
+      - /home/fran/domotica/zigbee2mqtt/data:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      # Frontend port
+      - 14532:14532
+    environment:
+      - TZ=Europe/Berlin
+    devices:
+      - /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_CHANGEME:/dev/ttyACM0
+
+  node-red:
+      container_name: node-red
+      image: nodered/node-red:latest
+      restart: unless-stopped
+      environment:
+        - TZ=Europe/Amsterdam
+      ports:
+        - 1880:1880
+      volumes:
+        - /home/fran/domotica/nodered/data:/data
+  influxdb:
+      image: influxdb:latest
+      container_name: influxdb
+      restart: unless-stopped
+      ports:
+        - 8086:8086
+      volumes:
+        - /home/fran/domotica/influxdb:/var/lib/influxdb
