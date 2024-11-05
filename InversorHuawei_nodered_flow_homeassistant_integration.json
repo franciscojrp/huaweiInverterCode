@@ -1,851 +1,1072 @@
 [
-    {
-        "id": "fa665b88aa84652e",
-        "type": "tab",
-        "label": "InversorHuawei",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "63ce5070425a3068",
-        "type": "modbus-read",
-        "z": "fa665b88aa84652e",
-        "name": "Huawei",
-        "topic": "",
-        "showStatusActivities": false,
-        "logIOActivities": false,
-        "showErrors": false,
-        "showWarnings": true,
-        "unitid": "0",
-        "dataType": "HoldingRegister",
-        "adr": "32000",
-        "quantity": "116",
-        "rate": "10",
-        "rateUnit": "s",
-        "delayOnStart": false,
-        "startDelayTime": "",
-        "server": "97dae5c9bd33f9c4",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "x": 150,
-        "y": 120,
-        "wires": [
-            [
-                "2e6a2d773d9bbeba"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "2e6a2d773d9bbeba",
-        "type": "buffer-parser",
-        "z": "fa665b88aa84652e",
-        "name": "Parser Inverter Modbus TCP",
-        "data": "responseBuffer.buffer",
-        "dataType": "msg",
-        "specification": "spec",
-        "specificationType": "ui",
-        "items": [
-            {
-                "type": "int16be",
-                "name": "string1_V",
-                "offset": 32,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/10",
-                "mask": ""
-            },
-            {
-                "type": "int16be",
-                "name": "string1_A",
-                "offset": 34,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "int16be",
-                "name": "string2_V",
-                "offset": 36,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/10",
-                "mask": ""
-            },
-            {
-                "type": "int16be",
-                "name": "string2_A",
-                "offset": 38,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "panels_power_kW",
-                "offset": 128,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/1000",
-                "mask": ""
-            },
-            {
-                "type": "uint16be",
-                "name": "grid_power_V",
-                "offset": 132,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/10",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "grid_power_A",
-                "offset": 144,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/1000",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "day_active_power_peak_kW",
-                "offset": 156,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/1000",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "active_power_kW",
-                "offset": 160,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/1000",
-                "mask": ""
-            },
-            {
-                "type": "uint16be",
-                "name": "grid_frequency_Hz",
-                "offset": 170,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "uint16be",
-                "name": "inverter_efficiency",
-                "offset": 172,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "int16be",
-                "name": "inverter_temp",
-                "offset": 174,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/10",
-                "mask": ""
-            },
-            {
-                "type": "uint16be",
-                "name": "inverter_status",
-                "offset": 178,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "1",
-                "mask": ""
-            },
-            {
-                "type": "uint32be",
-                "name": "accumulated_energy_yield_kWh",
-                "offset": 212,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "uint32be",
-                "name": "day_energy_yield_kWh",
-                "offset": 228,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            }
-        ],
-        "swap1": "",
-        "swap2": "",
-        "swap3": "",
-        "swap1Type": "swap",
-        "swap2Type": "swap",
-        "swap3Type": "swap",
-        "msgProperty": "payload",
-        "msgPropertyType": "str",
-        "resultType": "keyvalue",
-        "resultTypeType": "return",
-        "multipleResult": false,
-        "fanOutMultipleResult": false,
-        "setTopic": true,
-        "outputs": 1,
-        "x": 440,
-        "y": 120,
-        "wires": [
-            [
-                "c10f40db18841363",
-                "6e07063614296871",
-                "6445f0f16f804b9f",
-                "6b23c8504e1699f3"
-            ]
-        ]
-    },
-    {
-        "id": "9c2a6f967f8e6305",
-        "type": "buffer-parser",
-        "z": "fa665b88aa84652e",
-        "name": "Parser Powermeter Modbus TCP",
-        "data": "responseBuffer.buffer",
-        "dataType": "msg",
-        "specification": "spec",
-        "specificationType": "ui",
-        "items": [
-            {
-                "type": "int32be",
-                "name": "powermeter_kW",
-                "offset": 0,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/1000",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "powermeter_exported_energy_kWh",
-                "offset": 12,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            },
-            {
-                "type": "int32be",
-                "name": "powermeter_imported_energy_kWh",
-                "offset": 16,
-                "length": 1,
-                "offsetbit": 0,
-                "scale": "/100",
-                "mask": ""
-            }
-        ],
-        "swap1": "",
-        "swap2": "",
-        "swap3": "",
-        "swap1Type": "swap",
-        "swap2Type": "swap",
-        "swap3Type": "swap",
-        "msgProperty": "payload",
-        "msgPropertyType": "str",
-        "resultType": "keyvalue",
-        "resultTypeType": "return",
-        "multipleResult": false,
-        "fanOutMultipleResult": false,
-        "setTopic": true,
-        "outputs": 1,
-        "x": 420,
-        "y": 260,
-        "wires": [
-            [
-                "79defa49cf24c12b"
-            ]
-        ]
-    },
-    {
-        "id": "2d3914b98df5d06d",
-        "type": "debug",
-        "z": "fa665b88aa84652e",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "c10f40db18841363",
-        "type": "influxdb out",
-        "z": "fa665b88aa84652e",
-        "influxdb": "f769ef35385ef6c2",
-        "name": "InfluxDB",
-        "measurement": "Huawei",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "database",
-        "precisionV18FluxV20": "s",
-        "retentionPolicyV18Flux": "",
-        "org": "casaCaste",
-        "bucket": "Inversor",
-        "x": 720,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "85bb14e6a70d08e3",
-        "type": "modbus-read",
-        "z": "fa665b88aa84652e",
-        "name": "Huawei",
-        "topic": "",
-        "showStatusActivities": false,
-        "logIOActivities": false,
-        "showErrors": false,
-        "showWarnings": true,
-        "unitid": "0",
-        "dataType": "HoldingRegister",
-        "adr": "37113",
-        "quantity": "10",
-        "rate": "10",
-        "rateUnit": "s",
-        "delayOnStart": false,
-        "startDelayTime": "",
-        "server": "97dae5c9bd33f9c4",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "x": 150,
-        "y": 260,
-        "wires": [
-            [
-                "9c2a6f967f8e6305"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "79defa49cf24c12b",
-        "type": "function",
-        "z": "fa665b88aa84652e",
-        "name": "Split value",
-        "func": "var value = msg.payload[\"powermeter_kW\"]\nif (value >= 0) {\n    // > 0: feeding power to the grid\n    msg.payload[\"exported_kW\"] = value;\n    msg.payload[\"imported_kW\"] = 0;\n} else {\n    // < 0: obtaining power from the grid\n    msg.payload[\"exported_kW\"] = 0;\n    msg.payload[\"imported_kW\"] = value * -1;\n}\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 570,
-        "y": 400,
-        "wires": [
-            [
-                "c6f5246fc7d90e0d",
-                "3a2522192711fcbd",
-                "07d7e5f0401b05fd",
-                "fb98eda625942e05",
-                "c10f40db18841363"
-            ]
-        ]
-    },
-    {
-        "id": "c6f5246fc7d90e0d",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Imported",
-        "entityConfig": "c944cc4bf0ac5fbf",
-        "version": 0,
-        "state": "payload.imported_kW",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 940,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "3a2522192711fcbd",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Exported",
-        "entityConfig": "3e5cf872c04bda8d",
-        "version": 0,
-        "state": "payload.exported_kW",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 940,
-        "y": 480,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "07d7e5f0401b05fd",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Exported energy accumulated",
-        "entityConfig": "1ecc7fbfaa09c11d",
-        "version": 0,
-        "state": "payload.powermeter_exported_energy_kWh",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 1010,
-        "y": 560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "fb98eda625942e05",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Imported energy accumulated",
-        "entityConfig": "dc09c51b16c6c9c8",
-        "version": 0,
-        "state": "payload.powermeter_imported_energy_kWh",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 1010,
-        "y": 640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6e07063614296871",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Produced energy accumulated",
-        "entityConfig": "323cf73ccf3dc2c5",
-        "version": 0,
-        "state": "payload.accumulated_energy_yield_kWh",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 990,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6445f0f16f804b9f",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Produced energy day",
-        "entityConfig": "3fc042d730d4edb4",
-        "version": 0,
-        "state": "payload.day_energy_yield_kWh",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 960,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6b23c8504e1699f3",
-        "type": "ha-sensor",
-        "z": "fa665b88aa84652e",
-        "name": "Active power",
-        "entityConfig": "a6533ff65bc51b83",
-        "version": 0,
-        "state": "payload.active_power_kW",
-        "stateType": "msg",
-        "attributes": [],
-        "inputOverride": "allow",
-        "outputProperties": [],
-        "x": 930,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "97dae5c9bd33f9c4",
-        "type": "modbus-client",
-        "name": "Huawei SUN-2000",
-        "clienttype": "tcp",
-        "bufferCommands": false,
-        "stateLogEnabled": false,
-        "queueLogEnabled": true,
-        "failureLogEnabled": true,
-        "tcpHost": "192.168.200.1",
-        "tcpPort": "6607",
-        "tcpType": "DEFAULT",
-        "serialPort": "/dev/ttyUSB",
-        "serialType": "RTU-BUFFERD",
-        "serialBaudrate": "9600",
-        "serialDatabits": "8",
-        "serialStopbits": "1",
-        "serialParity": "none",
-        "serialConnectionDelay": "100",
-        "serialAsciiResponseStartDelimiter": "0x3A",
-        "unit_id": "0",
-        "commandDelay": "1",
-        "clientTimeout": "1000",
-        "reconnectOnTimeout": true,
-        "reconnectTimeout": "2000",
-        "parallelUnitIdsAllowed": true,
-        "showWarnings": true,
-        "showLogs": true
-    },
-    {
-        "id": "f769ef35385ef6c2",
-        "type": "influxdb",
-        "hostname": "127.0.0.1",
-        "port": "8086",
-        "protocol": "http",
-        "database": "database",
-        "name": "InfluxDB",
-        "usetls": false,
-        "tls": "",
-        "influxdbVersion": "2.0",
-        "url": "http://192.168.50.213:8086",
-        "rejectUnauthorized": false
-    },
-    {
-        "id": "c944cc4bf0ac5fbf",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Imported Power",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Imported Power"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "power"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kW"
-            },
-            {
-                "property": "state_class",
-                "value": "measurement"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "3e5cf872c04bda8d",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Exported power",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Exported power"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "power"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kW"
-            },
-            {
-                "property": "state_class",
-                "value": "measurement"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "1ecc7fbfaa09c11d",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Accumulated exported energy",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Accumulated exported energy"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "energy"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kWh"
-            },
-            {
-                "property": "state_class",
-                "value": "total_increasing"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "dc09c51b16c6c9c8",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Accumulated imported energy",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Accumulated imported energy"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "energy"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kWh"
-            },
-            {
-                "property": "state_class",
-                "value": "total_increasing"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "323cf73ccf3dc2c5",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Produced energy accumulated",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Produced energy accumulated"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "energy"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kWh"
-            },
-            {
-                "property": "state_class",
-                "value": "total_increasing"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "3fc042d730d4edb4",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Produced energy daily",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Produced energy day"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "energy"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kWh"
-            },
-            {
-                "property": "state_class",
-                "value": "total"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "a6533ff65bc51b83",
-        "type": "ha-entity-config",
-        "server": "e3bbec89a3c0c3de",
-        "deviceConfig": "f0b36f91ceb0c035",
-        "name": "Active power",
-        "version": "6",
-        "entityType": "sensor",
-        "haConfig": [
-            {
-                "property": "name",
-                "value": "Active power"
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "entity_category",
-                "value": ""
-            },
-            {
-                "property": "entity_picture",
-                "value": ""
-            },
-            {
-                "property": "device_class",
-                "value": "power"
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kW"
-            },
-            {
-                "property": "state_class",
-                "value": "measurement"
-            }
-        ],
-        "resend": false,
-        "debugEnabled": false
-    },
-    {
-        "id": "e3bbec89a3c0c3de",
-        "type": "server",
-        "name": "Home Assistant",
-        "version": 5,
-        "addon": false,
-        "rejectUnauthorizedCerts": true,
-        "ha_boolean": "y|yes|true|on|home|open",
-        "connectionDelay": true,
-        "cacheJson": true,
-        "heartbeat": false,
-        "heartbeatInterval": "30",
-        "areaSelector": "friendlyName",
-        "deviceSelector": "friendlyName",
-        "entitySelector": "friendlyName",
-        "statusSeparator": ": ",
-        "statusYear": "hidden",
-        "statusMonth": "short",
-        "statusDay": "numeric",
-        "statusHourCycle": "default",
-        "statusTimeFormat": "h:m",
-        "enableGlobalContextStore": false
-    },
-    {
-        "id": "f0b36f91ceb0c035",
-        "type": "ha-device-config",
-        "name": "Grid power",
-        "hwVersion": "1",
-        "manufacturer": "Huawei",
-        "model": "SUN2000",
-        "swVersion": "1"
-    }
+	{
+		"id": "fa665b88aa84652e",
+		"type": "tab",
+		"label": "InversorHuawei",
+		"disabled": false,
+		"info": "",
+		"env": [
+
+		]
+	},
+	{
+		"id": "63ce5070425a3068",
+		"type": "modbus-read",
+		"z": "fa665b88aa84652e",
+		"name": "Huawei",
+		"topic": "",
+		"showStatusActivities": false,
+		"logIOActivities": false,
+		"showErrors": false,
+		"showWarnings": true,
+		"unitid": "0",
+		"dataType": "HoldingRegister",
+		"adr": "32000",
+		"quantity": "116",
+		"rate": "15",
+		"rateUnit": "s",
+		"delayOnStart": false,
+		"startDelayTime": "",
+		"server": "97dae5c9bd33f9c4",
+		"useIOFile": false,
+		"ioFile": "",
+		"useIOForPayload": false,
+		"emptyMsgOnFail": false,
+		"x": 190,
+		"y": 360,
+		"wires": [
+			[
+				"2e6a2d773d9bbeba"
+			],
+			[
+
+			]
+		]
+	},
+	{
+		"id": "2e6a2d773d9bbeba",
+		"type": "buffer-parser",
+		"z": "fa665b88aa84652e",
+		"name": "Parser Inverter Modbus TCP",
+		"data": "responseBuffer.buffer",
+		"dataType": "msg",
+		"specification": "spec",
+		"specificationType": "ui",
+		"items": [
+			{
+				"type": "int16be",
+				"name": "string1_V",
+				"offset": 32,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/10",
+				"mask": ""
+			},
+			{
+				"type": "int16be",
+				"name": "string1_A",
+				"offset": 34,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "int16be",
+				"name": "string2_V",
+				"offset": 36,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/10",
+				"mask": ""
+			},
+			{
+				"type": "int16be",
+				"name": "string2_A",
+				"offset": 38,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "panels_power_kW",
+				"offset": 128,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/1000",
+				"mask": ""
+			},
+			{
+				"type": "uint16be",
+				"name": "grid_power_V",
+				"offset": 132,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/10",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "grid_power_A",
+				"offset": 144,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/1000",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "day_active_power_peak_kW",
+				"offset": 156,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/1000",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "active_power_kW",
+				"offset": 160,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/1000",
+				"mask": ""
+			},
+			{
+				"type": "uint16be",
+				"name": "grid_frequency_Hz",
+				"offset": 170,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "uint16be",
+				"name": "inverter_efficiency",
+				"offset": 172,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "int16be",
+				"name": "inverter_temp",
+				"offset": 174,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/10",
+				"mask": ""
+			},
+			{
+				"type": "uint16be",
+				"name": "inverter_status",
+				"offset": 178,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "1",
+				"mask": ""
+			},
+			{
+				"type": "uint32be",
+				"name": "accumulated_energy_yield_kWh",
+				"offset": 212,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "uint32be",
+				"name": "day_energy_yield_kWh",
+				"offset": 228,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			}
+		],
+		"swap1": "",
+		"swap2": "",
+		"swap3": "",
+		"swap1Type": "swap",
+		"swap2Type": "swap",
+		"swap3Type": "swap",
+		"msgProperty": "payload",
+		"msgPropertyType": "str",
+		"resultType": "keyvalue",
+		"resultTypeType": "return",
+		"multipleResult": false,
+		"fanOutMultipleResult": false,
+		"setTopic": true,
+		"outputs": 1,
+		"x": 480,
+		"y": 360,
+		"wires": [
+			[
+				"c10f40db18841363",
+				"6e07063614296871",
+				"6445f0f16f804b9f",
+				"6b23c8504e1699f3",
+				"6bdf3cf7ee21ea61",
+				"eea05938dde0989f"
+			]
+		]
+	},
+	{
+		"id": "9c2a6f967f8e6305",
+		"type": "buffer-parser",
+		"z": "fa665b88aa84652e",
+		"name": "Parser Powermeter Modbus TCP",
+		"data": "responseBuffer.buffer",
+		"dataType": "msg",
+		"specification": "spec",
+		"specificationType": "ui",
+		"items": [
+			{
+				"type": "int32be",
+				"name": "powermeter_kW",
+				"offset": 0,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/1000",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "powermeter_exported_energy_kWh",
+				"offset": 12,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			},
+			{
+				"type": "int32be",
+				"name": "powermeter_imported_energy_kWh",
+				"offset": 16,
+				"length": 1,
+				"offsetbit": 0,
+				"scale": "/100",
+				"mask": ""
+			}
+		],
+		"swap1": "",
+		"swap2": "",
+		"swap3": "",
+		"swap1Type": "swap",
+		"swap2Type": "swap",
+		"swap3Type": "swap",
+		"msgProperty": "payload",
+		"msgPropertyType": "str",
+		"resultType": "keyvalue",
+		"resultTypeType": "return",
+		"multipleResult": false,
+		"fanOutMultipleResult": false,
+		"setTopic": true,
+		"outputs": 1,
+		"x": 460,
+		"y": 500,
+		"wires": [
+			[
+				"79defa49cf24c12b",
+				"e262d1cb0771bde7"
+			]
+		]
+	},
+	{
+		"id": "c10f40db18841363",
+		"type": "influxdb out",
+		"z": "fa665b88aa84652e",
+		"d": true,
+		"influxdb": "f769ef35385ef6c2",
+		"name": "InfluxDB",
+		"measurement": "Huawei",
+		"precision": "",
+		"retentionPolicy": "",
+		"database": "database",
+		"precisionV18FluxV20": "s",
+		"retentionPolicyV18Flux": "",
+		"org": "casaCaste",
+		"bucket": "InversorFotovoltaico",
+		"x": 780,
+		"y": 520,
+		"wires": [
+
+		]
+	},
+	{
+		"id": "85bb14e6a70d08e3",
+		"type": "modbus-read",
+		"z": "fa665b88aa84652e",
+		"name": "Huawei",
+		"topic": "",
+		"showStatusActivities": false,
+		"logIOActivities": false,
+		"showErrors": false,
+		"showWarnings": true,
+		"unitid": "0",
+		"dataType": "HoldingRegister",
+		"adr": "37113",
+		"quantity": "10",
+		"rate": "15",
+		"rateUnit": "s",
+		"delayOnStart": false,
+		"startDelayTime": "",
+		"server": "97dae5c9bd33f9c4",
+		"useIOFile": false,
+		"ioFile": "",
+		"useIOForPayload": false,
+		"emptyMsgOnFail": false,
+		"x": 190,
+		"y": 500,
+		"wires": [
+			[
+				"9c2a6f967f8e6305"
+			],
+			[
+
+			]
+		]
+	},
+	{
+		"id": "79defa49cf24c12b",
+		"type": "function",
+		"z": "fa665b88aa84652e",
+		"name": "Split value",
+		"func": "var value = msg.payload[\"powermeter_kW\"]\nif (value >= 0) {\n    // > 0: feeding power to the grid\n    msg.payload[\"exported_kW\"] = value;\n    msg.payload[\"imported_kW\"] = 0;\n} else {\n    // < 0: obtaining power from the grid\n    msg.payload[\"exported_kW\"] = 0;\n    msg.payload[\"imported_kW\"] = value * -1;\n}\nreturn msg;",
+		"outputs": 1,
+		"timeout": "",
+		"noerr": 0,
+		"initialize": "",
+		"finalize": "",
+		"libs": [
+
+		],
+		"x": 750,
+		"y": 680,
+		"wires": [
+			[
+				"c6f5246fc7d90e0d",
+				"3a2522192711fcbd",
+				"07d7e5f0401b05fd",
+				"fb98eda625942e05",
+				"c10f40db18841363"
+			]
+		]
+	},
+	{
+		"id": "c6f5246fc7d90e0d",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Imported",
+		"entityConfig": "c944cc4bf0ac5fbf",
+		"version": 0,
+		"state": "payload.imported_kW",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 960,
+		"y": 560,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "3a2522192711fcbd",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Exported",
+		"entityConfig": "3e5cf872c04bda8d",
+		"version": 0,
+		"state": "payload.exported_kW",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 960,
+		"y": 640,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "07d7e5f0401b05fd",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Exported energy accumulated",
+		"entityConfig": "1ecc7fbfaa09c11d",
+		"version": 0,
+		"state": "payload.powermeter_exported_energy_kWh",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 1030,
+		"y": 720,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "fb98eda625942e05",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Imported energy accumulated",
+		"entityConfig": "dc09c51b16c6c9c8",
+		"version": 0,
+		"state": "payload.powermeter_imported_energy_kWh",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 1030,
+		"y": 800,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "6e07063614296871",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Produced energy accumulated",
+		"entityConfig": "323cf73ccf3dc2c5",
+		"version": 0,
+		"state": "payload.accumulated_energy_yield_kWh",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 1030,
+		"y": 400,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "6445f0f16f804b9f",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Produced energy day",
+		"entityConfig": "3fc042d730d4edb4",
+		"version": 0,
+		"state": "payload.day_energy_yield_kWh",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 1000,
+		"y": 480,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "6b23c8504e1699f3",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Active power",
+		"entityConfig": "a6533ff65bc51b83",
+		"version": 0,
+		"state": "payload.active_power_kW",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 970,
+		"y": 320,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "6bdf3cf7ee21ea61",
+		"type": "ha-sensor",
+		"z": "fa665b88aa84652e",
+		"name": "Day power peak",
+		"entityConfig": "74599754a1a30375",
+		"version": 0,
+		"state": "payload.day_active_power_peak_kW",
+		"stateType": "msg",
+		"attributes": [
+
+		],
+		"inputOverride": "allow",
+		"outputProperties": [
+
+		],
+		"x": 980,
+		"y": 240,
+		"wires": [
+			[
+
+			]
+		]
+	},
+	{
+		"id": "793fa86b3636075b",
+		"type": "mqtt out",
+		"z": "fa665b88aa84652e",
+		"name": "MQTT Sun Power",
+		"topic": "trydan_v2c_sun_power",
+		"qos": "",
+		"retain": "",
+		"respTopic": "",
+		"contentType": "",
+		"userProps": "",
+		"correl": "",
+		"expiry": "",
+		"broker": "302b888fedcf0e42",
+		"x": 990,
+		"y": 160,
+		"wires": [
+
+		]
+	},
+	{
+		"id": "c79d36e028841734",
+		"type": "mqtt out",
+		"z": "fa665b88aa84652e",
+		"name": "MQTT Grid Power",
+		"topic": "trydan_v2c_grid_power",
+		"qos": "",
+		"retain": "",
+		"respTopic": "",
+		"contentType": "",
+		"userProps": "",
+		"correl": "",
+		"expiry": "",
+		"broker": "302b888fedcf0e42",
+		"x": 990,
+		"y": 880,
+		"wires": [
+
+		]
+	},
+	{
+		"id": "e262d1cb0771bde7",
+		"type": "function",
+		"z": "fa665b88aa84652e",
+		"name": "powermeter_kW to watts",
+		"func": "var value = msg.payload[\"powermeter_kW\"]\nmsg.payload = value * 1000\nreturn msg;",
+		"outputs": 1,
+		"timeout": "",
+		"noerr": 0,
+		"initialize": "",
+		"finalize": "",
+		"libs": [
+
+		],
+		"x": 750,
+		"y": 880,
+		"wires": [
+			[
+				"c79d36e028841734"
+			]
+		]
+	},
+	{
+		"id": "eea05938dde0989f",
+		"type": "function",
+		"z": "fa665b88aa84652e",
+		"name": "active_power_kW to watts",
+		"func": "var value = msg.payload[\"active_power_kW\"]\nmsg.payload = value * 1000\nreturn msg;",
+		"outputs": 1,
+		"timeout": "",
+		"noerr": 0,
+		"initialize": "",
+		"finalize": "",
+		"libs": [
+
+		],
+		"x": 740,
+		"y": 160,
+		"wires": [
+			[
+				"793fa86b3636075b"
+			]
+		]
+	},
+	{
+		"id": "97dae5c9bd33f9c4",
+		"type": "modbus-client",
+		"name": "Huawei SUN-2000",
+		"clienttype": "tcp",
+		"bufferCommands": false,
+		"stateLogEnabled": false,
+		"queueLogEnabled": true,
+		"failureLogEnabled": true,
+		"tcpHost": "192.168.200.1",
+		"tcpPort": "6607",
+		"tcpType": "DEFAULT",
+		"serialPort": "/dev/ttyUSB",
+		"serialType": "RTU-BUFFERD",
+		"serialBaudrate": "9600",
+		"serialDatabits": "8",
+		"serialStopbits": "1",
+		"serialParity": "none",
+		"serialConnectionDelay": "100",
+		"serialAsciiResponseStartDelimiter": "0x3A",
+		"unit_id": 0,
+		"commandDelay": 1,
+		"clientTimeout": 1000,
+		"reconnectOnTimeout": true,
+		"reconnectTimeout": 2000,
+		"parallelUnitIdsAllowed": true,
+		"showWarnings": true,
+		"showLogs": true
+	},
+	{
+		"id": "f769ef35385ef6c2",
+		"type": "influxdb",
+		"hostname": "127.0.0.1",
+		"port": "8086",
+		"protocol": "http",
+		"database": "database",
+		"name": "InfluxDB",
+		"usetls": false,
+		"tls": "",
+		"influxdbVersion": "2.0",
+		"url": "http://192.168.50.19:8086/",
+		"timeout": "",
+		"rejectUnauthorized": false
+	},
+	{
+		"id": "c944cc4bf0ac5fbf",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Imported Power",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Imported Power"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "power"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kW"
+			},
+			{
+				"property": "state_class",
+				"value": "measurement"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "3e5cf872c04bda8d",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Exported power",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Exported power"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "power"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kW"
+			},
+			{
+				"property": "state_class",
+				"value": "measurement"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "1ecc7fbfaa09c11d",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Accumulated exported energy",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Accumulated exported energy"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "energy"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kWh"
+			},
+			{
+				"property": "state_class",
+				"value": "total_increasing"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "dc09c51b16c6c9c8",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Accumulated imported energy",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Accumulated imported energy"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "energy"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kWh"
+			},
+			{
+				"property": "state_class",
+				"value": "total_increasing"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "323cf73ccf3dc2c5",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Produced energy accumulated",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Produced energy accumulated"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "energy"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kWh"
+			},
+			{
+				"property": "state_class",
+				"value": "total_increasing"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "3fc042d730d4edb4",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Produced energy daily",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Produced energy day"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "energy"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kWh"
+			},
+			{
+				"property": "state_class",
+				"value": "total"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "a6533ff65bc51b83",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Active power",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Active power"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "power"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kW"
+			},
+			{
+				"property": "state_class",
+				"value": "measurement"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "74599754a1a30375",
+		"type": "ha-entity-config",
+		"server": "e3bbec89a3c0c3de",
+		"deviceConfig": "f0b36f91ceb0c035",
+		"name": "Day power peak",
+		"version": "6",
+		"entityType": "sensor",
+		"haConfig": [
+			{
+				"property": "name",
+				"value": "Day power peak"
+			},
+			{
+				"property": "icon",
+				"value": ""
+			},
+			{
+				"property": "entity_picture",
+				"value": ""
+			},
+			{
+				"property": "entity_category",
+				"value": ""
+			},
+			{
+				"property": "device_class",
+				"value": "power"
+			},
+			{
+				"property": "unit_of_measurement",
+				"value": "kW"
+			},
+			{
+				"property": "state_class",
+				"value": "measurement"
+			}
+		],
+		"resend": false,
+		"debugEnabled": false
+	},
+	{
+		"id": "302b888fedcf0e42",
+		"type": "mqtt-broker",
+		"name": "",
+		"broker": "192.168.50.19",
+		"port": "1883",
+		"clientid": "",
+		"autoConnect": true,
+		"usetls": false,
+		"protocolVersion": "4",
+		"keepalive": "60",
+		"cleansession": true,
+		"autoUnsubscribe": true,
+		"birthTopic": "",
+		"birthQos": "0",
+		"birthPayload": "",
+		"birthMsg": {
+		},
+		"closeTopic": "",
+		"closeQos": "0",
+		"closePayload": "",
+		"closeMsg": {
+		},
+		"willTopic": "",
+		"willQos": "0",
+		"willPayload": "",
+		"willMsg": {
+		},
+		"userProps": "",
+		"sessionExpiry": ""
+	},
+	{
+		"id": "e3bbec89a3c0c3de",
+		"type": "server",
+		"name": "Home Assistant",
+		"version": 5,
+		"addon": true,
+		"rejectUnauthorizedCerts": true,
+		"ha_boolean": "y|yes|true|on|home|open",
+		"connectionDelay": true,
+		"cacheJson": true,
+		"heartbeat": false,
+		"heartbeatInterval": "30",
+		"areaSelector": "friendlyName",
+		"deviceSelector": "friendlyName",
+		"entitySelector": "friendlyName",
+		"statusSeparator": ": ",
+		"statusYear": "hidden",
+		"statusMonth": "short",
+		"statusDay": "numeric",
+		"statusHourCycle": "default",
+		"statusTimeFormat": "h:m",
+		"enableGlobalContextStore": false
+	},
+	{
+		"id": "f0b36f91ceb0c035",
+		"type": "ha-device-config",
+		"name": "Grid power",
+		"hwVersion": "1",
+		"manufacturer": "Huawei",
+		"model": "SUN2000",
+		"swVersion": "1"
+	}
 ]
